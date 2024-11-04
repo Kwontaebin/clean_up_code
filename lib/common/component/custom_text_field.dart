@@ -18,7 +18,7 @@ class CustomTextFieldWidget extends StatelessWidget {
   final double? width;
   final double? height;
   final ValueChanged<String> onChanged;
-  final bool isNum;
+  final bool onlyNum;
 
   const CustomTextFieldWidget({
     super.key,
@@ -28,7 +28,7 @@ class CustomTextFieldWidget extends StatelessWidget {
     required this.hintText,
     this.backGroundColor = Colors.white12,
     required this.onChanged,
-    this.isNum = false,
+    this.onlyNum = false,
   });
 
   @override
@@ -46,10 +46,10 @@ class CustomTextFieldWidget extends StatelessWidget {
       child: TextFormField(
         controller: controller,
         onChanged: onChanged,
-        keyboardType: isNum ? TextInputType.number : TextInputType.text,
+        keyboardType: onlyNum ? TextInputType.number : TextInputType.text,
         inputFormatters: [
           FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 안되도록
-          if (isNum) FilteringTextInputFormatter.digitsOnly,
+          if (onlyNum) FilteringTextInputFormatter.digitsOnly,
         ],
         decoration: InputDecoration(
           contentPadding: const EdgeInsets.all(20),

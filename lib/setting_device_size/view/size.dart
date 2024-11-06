@@ -55,11 +55,12 @@ class _SizeScreenState extends State<SizeScreen> {
                   height: deviceHeight(context) * 0.3,
                   child: const ImgSlideScreen(),
                 ),
+                SizedBox(height: deviceHeight(context) * 0.01),
                 Container(
                   height: deviceHeight(context) * 0.25,
                   color: Colors.cyanAccent,
                 ),
-                const SizedBox(height: 10),
+                SizedBox(height: deviceHeight(context) * 0.01),
                 CustomElevatedButton(
                   height: deviceHeight(context) * 0.06,
                   text: "btn",

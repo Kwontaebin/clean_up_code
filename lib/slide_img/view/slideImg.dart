@@ -25,74 +25,71 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      child: Center(
-        child: Stack(
-          alignment: Alignment.bottomCenter,
-          children: [
-            CarouselSlider(
-              carouselController: _carouselController,
-              options: CarouselOptions(
-                enlargeCenterPage: false, // 현재 이미지 크게 표시(viewportFraction:1.0으로 설정해서 상관이 없음)
-                autoPlay: true, // 자동 슬라이드
-                autoPlayInterval: const Duration(seconds: 3), // 슬라이드 속도
-                viewportFraction: 1.0, // 슬라이드 간 간격 조절
-                onPageChanged: (index, reason) {
-                  setState(() {
-                    _currentIndex = index;
-                  });
-                },
-              ),
-              items: colors.asMap().entries.map((entry) {
-                int index = entry.key;
-                Color color = entry.value;
-                return Builder(
-                  builder: (BuildContext context) {
-                    return Container(
-                      decoration: BoxDecoration(
-                        color: color,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Color ${index + 1}',
-                          style: const TextStyle(
-                            fontSize: 24.0,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
+    return Stack(
+      alignment: Alignment.bottomCenter,
+      children: [
+        SizedBox.expand( // 화면 전체를 차지하도록 수정
+          child: CarouselSlider(
+            carouselController: _carouselController,
+            options: CarouselOptions(
+              autoPlay: true,
+              autoPlayInterval: const Duration(seconds: 3),
+              viewportFraction: 1.0,
+              onPageChanged: (index, reason) {
+                setState(() {
+                  _currentIndex = index;
+                });
+              },
+            ),
+            items: colors.asMap().entries.map((entry) {
+              int index = entry.key;
+              Color color = entry.value;
+              return Builder(
+                builder: (BuildContext context) {
+                  return Container(
+                    width: double.infinity, // 슬라이드 아이템이 화면 너비 전체를 차지하도록 설정
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Center(
+                      child: Text(
+                        'Color ${index + 1}',
+                        style: const TextStyle(
+                          fontSize: 24.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
-                    );
-                  },
-                );
-              }).toList(),
-            ),
-            Positioned(
-              bottom: 10,
-              child: Container(
-                width: 200,
-                height: 6,
-                decoration: BoxDecoration(
-                  color: Colors.grey.shade300,
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                child: FractionallySizedBox(
-                  alignment: Alignment.centerLeft, // 프로그래스 바가 넘어가는 방향 외쪽 -> 오른쪽
-                  widthFactor: (_currentIndex + 1) / colors.length, // 프로그래스 바 게이지가 차는 넓이
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(3),
                     ),
-                  ),
+                  );
+                },
+              );
+            }).toList(),
+          ),
+        ),
+        Positioned(
+          bottom: 10,
+          child: Container(
+            width: 200,
+            height: 6,
+            decoration: BoxDecoration(
+              color: Colors.grey.shade300,
+              borderRadius: BorderRadius.circular(3),
+            ),
+            child: FractionallySizedBox(
+              alignment: Alignment.centerLeft,
+              widthFactor: (_currentIndex + 1) / colors.length,
+              child: Container(
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(3),
                 ),
               ),
             ),
-          ],
+          ),
         ),
-      ),
+      ],
     );
   }
 }

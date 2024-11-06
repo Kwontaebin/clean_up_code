@@ -1,5 +1,6 @@
 import 'package:clean_up_code/common/component/custom_appbar.dart';
 import 'package:clean_up_code/common/component/custom_elevatedButton.dart';
+import 'package:clean_up_code/common/function/navigator.dart';
 import 'package:clean_up_code/move_screen/view/secondScreen.dart';
 import 'package:flutter/material.dart';
 
@@ -17,11 +18,7 @@ class FirstScreen extends StatelessWidget {
         child: CustomElevatedButton(
           text: "button",
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const SecondScreen(),
-              ),
-            );
+            navigatorFn(context, const SecondScreen());
           },
         ),
       ),

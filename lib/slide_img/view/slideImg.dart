@@ -28,7 +28,7 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
     return Stack(
       alignment: Alignment.bottomCenter,
       children: [
-        SizedBox.expand( // 화면 전체를 차지하도록 수정
+        SizedBox.expand( // SizedBox.expand 위젯은 자식 위젯(CarouselSlider)이 화면의 전체 영역을 차지하도록 도와주는 위젯
           child: CarouselSlider(
             carouselController: _carouselController,
             options: CarouselOptions(

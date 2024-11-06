@@ -3,6 +3,7 @@ import 'package:clean_up_code/move_screen/view/thirdScreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../common/component/custom_elevatedButton.dart';
+import '../../common/function/navigator.dart';
 
 class SecondScreen extends StatelessWidget {
   const SecondScreen({super.key});
@@ -15,11 +16,7 @@ class SecondScreen extends StatelessWidget {
         child: CustomElevatedButton(
           text: "button",
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (_) => const ThirdScreen(),
-              ),
-            );
+            navigatorFn(context, const ThirdScreen());
           },
         ),
       ),

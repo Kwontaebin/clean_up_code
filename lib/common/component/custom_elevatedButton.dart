@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../function/sizeFn.dart';
 
 class CustomElevatedButton extends StatelessWidget {
@@ -28,7 +27,10 @@ class CustomElevatedButton extends StatelessWidget {
       onPressed: onPressed,
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
-        minimumSize: Size(width ?? sizeFn(context).width * 0.5, height ?? calculateBodyHeight(context) * 0.05),
+        minimumSize: Size(
+          width ?? sizeFn(context).width * 0.5,
+          height ?? deviceHeight(context) * 0.05,
+        ),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -37,8 +39,8 @@ class CustomElevatedButton extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-            color: Colors.white,
-            fontSize: buttonSize ?? sizeFn(context).width * 0.05
+          color: Colors.white,
+          fontSize: buttonSize ?? sizeFn(context).width * 0.05,
         ),
       ),
     );

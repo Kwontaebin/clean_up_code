@@ -1,5 +1,6 @@
 import 'package:clean_up_code/common/component/custom_appbar.dart';
 import 'package:clean_up_code/common/component/custom_text_field.dart';
+import 'package:clean_up_code/slide_img/view/slideImg.dart';
 import 'package:flutter/material.dart';
 import '../../common/component/custom_elevatedButton.dart';
 import '../../common/function/sizeFn.dart';
@@ -17,12 +18,12 @@ class _SizeScreenState extends State<SizeScreen> {
   @override
   void initState() {
     super.initState();
+    // controller 하드 코딩
     myController.text = "테스트 중!!";
   }
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus(); // 빈 공간 클릭 시 포커스 해제
@@ -35,32 +36,32 @@ class _SizeScreenState extends State<SizeScreen> {
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
           child: SizedBox(
-            width: size.width * 1.0,
-            height: calculateBodyHeight(context),
+            width: sizeFn(context).width * 1.0,
+            height: deviceHeight(context),
             child: Column(
               children: [
                 SizedBox(
-                  height: calculateBodyHeight(context) * 0.3,
+                  height: deviceHeight(context) * 0.3,
                   child: Center(
                     child: CustomTextFieldWidget(
-                      width: size.width * 0.9,
+                      width: sizeFn(context).width * 0.9,
                       controller: myController,
                       hintText: "입력해주세요",
                       onChanged: (value) {},
                     ),
                   ),
                 ),
-                Container(
-                  height: calculateBodyHeight(context) * 0.3,
-                  color: Colors.amberAccent,
+                SizedBox(
+                  height: deviceHeight(context) * 0.3,
+                  child: const ImgSlideScreen(),
                 ),
                 Container(
-                  height: calculateBodyHeight(context) * 0.25,
-                  color: Colors.red,
+                  height: deviceHeight(context) * 0.25,
+                  color: Colors.cyanAccent,
                 ),
                 const SizedBox(height: 10),
                 CustomElevatedButton(
-                  height: calculateBodyHeight(context) * 0.06,
+                  height: deviceHeight(context) * 0.06,
                   text: "btn",
                   buttonSize: sizeFn(context).width * 0.06,
                   onPressed: () {},

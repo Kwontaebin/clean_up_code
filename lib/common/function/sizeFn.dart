@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-double calculateBodyHeight(BuildContext context) {
+double deviceHeight(BuildContext context) {
   final size = MediaQuery.of(context).size;
   final appBarHeight = AppBar().preferredSize.height;
 

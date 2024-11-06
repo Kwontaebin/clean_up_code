@@ -1,6 +1,6 @@
 import 'package:clean_up_code/common/component/custom_appbar.dart';
 import 'package:clean_up_code/common/component/custom_text_field.dart';
-import 'package:clean_up_code/loading/view/loading.dart';
+import 'package:clean_up_code/common/component/custom_loading.dart';
 import 'package:clean_up_code/slide_img/view/slideImg.dart';
 import 'package:flutter/material.dart';
 import '../../common/component/custom_elevatedButton.dart';
@@ -60,6 +60,7 @@ class _SizeScreenState extends State<SizeScreen> {
                 Container(
                   height: deviceHeight(context) * 0.25,
                   color: Colors.cyanAccent,
+                  child: customLoading(),
                 ),
                 SizedBox(height: deviceHeight(context) * 0.01),
                 CustomElevatedButton(

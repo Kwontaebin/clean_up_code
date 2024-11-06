@@ -1,4 +1,4 @@
-import 'package:clean_up_code/loading/view/loading.dart';
+import 'package:clean_up_code/common/component/custom_loading.dart';
 import 'package:clean_up_code/move_screen/view/firstScreen.dart';
 import 'package:clean_up_code/setting_device_size/view/size.dart';
 import 'package:clean_up_code/slide_img/view/slideImg.dart';

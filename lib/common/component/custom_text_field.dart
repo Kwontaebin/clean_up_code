@@ -10,7 +10,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import '../function/sizeFn.dart';
 
 class CustomTextFieldWidget extends StatelessWidget {
@@ -45,8 +44,8 @@ class CustomTextFieldWidget extends StatelessWidget {
     );
 
     final textStyle = TextStyle(
-      fontSize: deviceHeight(context) * 0.3,
-      color: Colors.black
+      fontSize: deviceHeight(context) * 0.02,
+      fontWeight: FontWeight.w400,
     );
 
     // height 값에 따라 contentPadding을 동적으로 설정
@@ -67,9 +66,11 @@ class CustomTextFieldWidget extends StatelessWidget {
           FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
           if (onlyNum) FilteringTextInputFormatter.digitsOnly,
         ],
+        style: textStyle,
         decoration: InputDecoration(
           contentPadding: contentPadding,
           hintText: hintText,
+          hintStyle: textStyle,
           fillColor: backGroundColor,
           filled: true,
           border: baseBorder,

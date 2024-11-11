@@ -1,6 +1,10 @@
 import 'package:clean_up_code/common/component/custom_appbar.dart';
+import 'package:clean_up_code/common/component/custom_showdiaLog.dart';
+import 'package:clean_up_code/common/component/custom_text.dart';
 import 'package:clean_up_code/common/component/custom_text_field.dart';
 import 'package:clean_up_code/common/component/custom_loading.dart';
+import 'package:clean_up_code/common/function/navigator.dart';
+import 'package:clean_up_code/move_screen/view/firstScreen.dart';
 import 'package:clean_up_code/slide_img/view/slideImg.dart';
 import 'package:flutter/material.dart';
 import '../../common/component/custom_elevatedButton.dart';
@@ -42,16 +46,25 @@ class _SizeScreenState extends State<SizeScreen> {
             child: Column(
               children: [
                 SizedBox(
-                  height: deviceHeight(context) * 0.3,
-                  child: Center(
-                    child: CustomTextFieldWidget(
-                      width: sizeFn(context).width * 0.9,
-                      controller: myController,
-                      hintText: "입력해주세요",
-                      onChanged: (value) {},
-                    ),
-                  ),
-                ),
+                    height: deviceHeight(context) * 0.3,
+                    child: Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        Center(
+                          child: CustomTextFieldWidget(
+                            width: sizeFn(context).width * 0.9,
+                            controller: myController,
+                            hintText: "입력해주세요",
+                            onChanged: (value) {},
+                          ),
+                        ),
+                        const CustomTextWidget(
+                          text: "커스텀 텍스트!",
+                          textColor: Colors.red,
+                          textSize: 22,
+                        )
+                      ],
+                    )),
                 SizedBox(
                   height: deviceHeight(context) * 0.3,
                   child: const ImgSlideScreen(),
@@ -65,9 +78,25 @@ class _SizeScreenState extends State<SizeScreen> {
                 SizedBox(height: deviceHeight(context) * 0.01),
                 CustomElevatedButton(
                   height: deviceHeight(context) * 0.06,
-                  text: "btn",
-                  buttonSize: sizeFn(context).width * 0.06,
-                  onPressed: () {},
+                  text: "버튼",
+                  buttonTextSize: sizeFn(context).width * 0.06,
+                  color: Colors.blue,
+                  // buttonTextColor: Colors.black,
+                  buttonTextFontWeight: FontWeight.w900,
+                  onPressed: () {
+                    showMyDialog(
+                      context,
+                      title: '테스트',
+                      content: "지금은 테스트중!",
+                      leftButtonOnPressed: () {
+                        print("취소!!");
+                      },
+                      rightButtonOnPressed: () {
+                        print("확인!!");
+                        navigatorFn(context, const FirstScreen());
+                      },
+                    );
+                  },
                 ),
               ],
             ),

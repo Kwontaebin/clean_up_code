@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import '../function/sizeFn.dart';
 
 class CustomElevatedButton extends StatelessWidget {
-  final width;
-  final height;
-  final color;
-  final text;
-  final buttonColor;
-  final buttonSize;
+  final double? width;
+  final double? height;
+  final Color color;
+  final String text;
+  final Color buttonTextColor;
+  final double? buttonTextSize;
+  final FontWeight? buttonTextFontWeight;
   final VoidCallback? onPressed;
 
   const CustomElevatedButton({
@@ -16,8 +17,9 @@ class CustomElevatedButton extends StatelessWidget {
     this.height,
     this.color = Colors.red,
     required this.text,
-    this.buttonColor = Colors.white,
-    this.buttonSize,
+    this.buttonTextColor = Colors.white,
+    this.buttonTextSize,
+    this.buttonTextFontWeight,
     required this.onPressed,
   });
 
@@ -38,9 +40,11 @@ class CustomElevatedButton extends StatelessWidget {
       ),
       child: Text(
         text,
+        textAlign: TextAlign.center,
         style: TextStyle(
-          color: Colors.white,
-          fontSize: buttonSize ?? sizeFn(context).width * 0.05,
+          color: buttonTextColor,
+          fontSize: buttonTextSize ?? sizeFn(context).width * 0.05,
+          fontWeight: buttonTextFontWeight ?? FontWeight.w500
         ),
       ),
     );

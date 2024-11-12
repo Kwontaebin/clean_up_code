@@ -3,6 +3,7 @@ import 'package:clean_up_code/common/component/custom_showdiaLog.dart';
 import 'package:clean_up_code/common/component/custom_text.dart';
 import 'package:clean_up_code/common/component/custom_text_field.dart';
 import 'package:clean_up_code/common/component/custom_loading.dart';
+import 'package:clean_up_code/common/component/custom_toast.dart';
 import 'package:clean_up_code/common/function/navigator.dart';
 import 'package:clean_up_code/move_screen/view/firstScreen.dart';
 import 'package:clean_up_code/slide_img/view/slideImg.dart';
@@ -37,6 +38,7 @@ class _SizeScreenState extends State<SizeScreen> {
         appBar: const CustomAppBar(
           title: "sizeScreen",
           showLeading: false,
+          bgColor: Colors.lime,
         ),
         body: SingleChildScrollView(
           keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
@@ -45,6 +47,10 @@ class _SizeScreenState extends State<SizeScreen> {
             height: deviceHeight(context),
             child: Column(
               children: [
+                SizedBox(
+                  height: deviceHeight(context) * 0.3,
+                  child: const ImgSlideScreen(),
+                ),
                 SizedBox(
                     height: deviceHeight(context) * 0.3,
                     child: Column(
@@ -65,14 +71,10 @@ class _SizeScreenState extends State<SizeScreen> {
                         )
                       ],
                     )),
-                SizedBox(
-                  height: deviceHeight(context) * 0.3,
-                  child: const ImgSlideScreen(),
-                ),
+
                 SizedBox(height: deviceHeight(context) * 0.01),
-                Container(
+                SizedBox(
                   height: deviceHeight(context) * 0.25,
-                  color: Colors.cyanAccent,
                   child: customLoading(),
                 ),
                 SizedBox(height: deviceHeight(context) * 0.01),
@@ -89,10 +91,12 @@ class _SizeScreenState extends State<SizeScreen> {
                       title: '테스트',
                       content: "지금은 테스트중!",
                       leftButtonOnPressed: () {
+                        customToast("취소");
                         print("취소!!");
                       },
                       rightButtonOnPressed: () {
                         print("확인!!");
+                        customToast("화면 이동!");
                         navigatorFn(context, const FirstScreen());
                       },
                     );

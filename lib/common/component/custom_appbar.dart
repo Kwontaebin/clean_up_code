@@ -4,12 +4,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String title;
   final List<Widget>? actions;
   final bool showLeading;
+  final Color bgColor;
 
   const CustomAppBar({
     super.key,
     required this.title,
     this.actions,
     this.showLeading = true,
+    this.bgColor = Colors.blue,
   });
 
   @override
@@ -18,7 +20,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       iconTheme: const IconThemeData(
         color: Colors.white,
       ),
-      backgroundColor: Colors.blue,
+      backgroundColor: bgColor,
       title: Text(
         title,
         style: const TextStyle(
@@ -29,13 +31,14 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ),
       elevation: 0,
       centerTitle: true,
-      leading: !showLeading ? null : IconButton(
+      leading: showLeading
+          ? IconButton(
         onPressed: () {
           Navigator.pop(context);
         },
         icon: const Icon(Icons.arrow_back_outlined),
-      ),
-      actions: actions,
+      ) : Container(),
+      actions: actions
     );
   }
 

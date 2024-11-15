@@ -93,7 +93,7 @@ class _SizeScreenState extends State<SizeScreen> {
                           textColor: Colors.red,
                           textSize: 22,
                         ),
-                        CustomCheckbox(
+                        customCheckbox(
                           text: '이용 약관 모두 동의하기',
                           isChecked: checkStatus[0],
                           onChanged: (value) {
@@ -101,7 +101,7 @@ class _SizeScreenState extends State<SizeScreen> {
                           }
                         ),
                         for (int i = 1; i < checkStatus.length; i++)
-                          CustomCheckbox(
+                          customCheckbox(
                             text: checkBoxText[i - 1],
                             isChecked: checkStatus[i],
                             onChanged: (value) {

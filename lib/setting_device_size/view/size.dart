@@ -88,10 +88,10 @@ class _SizeScreenState extends State<SizeScreen> {
                             onChanged: (value) {},
                           ),
                         ),
-                        const CustomTextWidget(
+                        customTextWidget(
                           text: "커스텀 텍스트!",
-                          textColor: Colors.red,
-                          textSize: 22,
+                          textColor: Colors.blue,
+                          textSize: 18,
                         ),
                         customCheckbox(
                           text: '이용 약관 모두 동의하기',

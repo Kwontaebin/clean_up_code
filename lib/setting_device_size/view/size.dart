@@ -97,7 +97,10 @@ class _SizeScreenState extends State<SizeScreen> {
                       rightButtonOnPressed: () {
                         print("확인!!");
                         customToast("화면 이동!");
-                        navigatorFn(context, const FirstScreen());
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const FirstScreen()),
+                        );
                       },
                     );
                   },

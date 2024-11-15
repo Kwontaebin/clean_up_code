@@ -1,6 +1,5 @@
 import 'package:clean_up_code/setting_device_size/view/size.dart';
 import 'package:flutter/material.dart';
-import 'backend_connection/view/backendConnection.dart';
 
 void main() {
   runApp(const MyApp());

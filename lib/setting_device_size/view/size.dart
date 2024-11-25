@@ -22,6 +22,7 @@ class _SizeScreenState extends State<SizeScreen> {
   final myController = TextEditingController();
   List<bool> checkStatus = [false, false, false, false];
   List<String> checkBoxText = ["첫 번째 선택", "두 번째 이용 약관 선택", "세 번쨰 동의"];
+  List<String> showMoreText = ["첫 번째 글자 더보기 \n줄바꿈 까지 완벽하게", "두 번째 이용 약관 선택 더보기 \n줄바꿈 까지 완벽하게", "세 번쨰 동의 약관 더보기 \n줄바꿈 까지 완벽하게"];
 
   @override
   void initState() {
@@ -47,7 +48,7 @@ class _SizeScreenState extends State<SizeScreen> {
       checkStatus[index] = value;
 
       if (checkStatus[1] && checkStatus[2] && checkStatus[3]) checkStatus[0] = true;
-      else if(!checkStatus[1] || !checkStatus[2] || !checkStatus[3]) checkStatus[0] = false;
+      else if (!checkStatus[1] || !checkStatus[2] || !checkStatus[3]) checkStatus[0] = false;
     });
   }
 
@@ -93,15 +94,17 @@ class _SizeScreenState extends State<SizeScreen> {
                           textColor: Colors.blue,
                           textSize: 18,
                         ),
-                        customCheckbox(
+                        CustomCheckboxWidget(
                           text: '이용 약관 모두 동의하기',
+                          showMoreText: false,
                           isChecked: checkStatus[0],
                           onChanged: (value) {
                             checkAllCheckBox(value);
-                          }
+                          },
+                          showText: '',
                         ),
                         for (int i = 1; i < checkStatus.length; i++)
-                          customCheckbox(
+                          CustomCheckboxWidget(
                             text: checkBoxText[i - 1],
                             isChecked: checkStatus[i],
                             onChanged: (value) {
@@ -109,6 +112,7 @@ class _SizeScreenState extends State<SizeScreen> {
                                 updateCheckStatus(i, value!);
                               });
                             },
+                            showText: showMoreText[i - 1],
                           ),
                       ],
                     ),

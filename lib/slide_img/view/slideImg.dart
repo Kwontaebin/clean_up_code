@@ -50,7 +50,6 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
                     width: double.infinity, // 슬라이드 아이템이 화면 너비 전체를 차지하도록 설정
                     decoration: BoxDecoration(
                       color: color,
-                      borderRadius: BorderRadius.circular(10),
                     ),
                     child: Center(
                       child: Text(

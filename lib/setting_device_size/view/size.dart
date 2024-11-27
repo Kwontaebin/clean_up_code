@@ -19,17 +19,9 @@ class SizeScreen extends StatefulWidget {
 }
 
 class _SizeScreenState extends State<SizeScreen> {
-  final myController = TextEditingController();
   List<bool> checkStatus = [false, false, false, false];
   List<String> checkBoxText = ["첫 번째 선택", "두 번째 이용 약관 선택", "세 번쨰 동의"];
   List<String> showMoreText = ["첫 번째 글자 더보기 \n줄바꿈 까지 완벽하게", "두 번째 이용 약관 선택 더보기 \n줄바꿈 까지 완벽하게", "세 번쨰 동의 약관 더보기 \n줄바꿈 까지 완벽하게"];
-
-  @override
-  void initState() {
-    super.initState();
-    // controller 하드 코딩
-    myController.text = "테스트 중!!";
-  }
 
   void checkAllCheckBox(bool value) {
     setState(() {
@@ -84,7 +76,7 @@ class _SizeScreenState extends State<SizeScreen> {
                         Center(
                           child: CustomTextFieldWidget(
                             width: sizeFn(context).width * 0.9,
-                            controller: myController,
+                            myControllerText: '지금은 테스트 중!',
                             hintText: "입력해주세요",
                             onChanged: (value) {},
                           ),

@@ -1,6 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
+import '../../common/function/sizeFn.dart';
+
 class ImgSlideScreen extends StatefulWidget {
   const ImgSlideScreen({super.key});
 
@@ -16,11 +18,11 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
     Colors.red,
     Colors.green,
     Colors.blue,
-    Colors.yellow,
+    Colors.amber,
     Colors.red,
     Colors.green,
     Colors.blue,
-    Colors.yellow,
+    Colors.amber,
   ];
 
   @override
@@ -34,7 +36,7 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
             options: CarouselOptions(
               autoPlay: true,
               autoPlayInterval: const Duration(seconds: 3),
-              viewportFraction: 1.0,
+              viewportFraction: 1.0, // 전체 화면 꽉 차도록
               onPageChanged: (index, reason) {
                 setState(() {
                   _currentIndex = index;
@@ -67,6 +69,7 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
             }).toList(),
           ),
         ),
+        // 게이지로 몇번쨰 페이지 인지 표시
         Positioned(
           bottom: 10,
           child: Container(
@@ -88,6 +91,20 @@ class _ImgSlideScreenState extends State<ImgSlideScreen> {
             ),
           ),
         ),
+
+        // 현재 페이지 / 총 페이지 수 로 표시
+        // Positioned(
+        //   bottom: 5,
+        //   right: 35,
+        //   child: Text(
+        //     "${_currentIndex + 1} / ${colors.length}",
+        //     style: TextStyle(
+        //       color: Colors.white,
+        //       fontSize: sizeFn(context).width * 0.04,
+        //       fontWeight: FontWeight.w900,
+        //     ),
+        //   ),
+        // )
       ],
     );
   }

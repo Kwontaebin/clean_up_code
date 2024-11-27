@@ -5,21 +5,18 @@ Widget customTextShowHide({
   required String text,
 }) {
   return Container(
+    // container -> alignment 속성을 사용해서 글자 중앙 정렬
     alignment: Alignment.center,
     padding: const EdgeInsets.all(16.0),
-    child: AnimatedOpacity(
-      duration: const Duration(milliseconds: 300),
-      opacity: isTextVisible ? 1.0 : 0.0,
-      child: isTextVisible
-          ? Column(
-        children: [
-          Text(
-            text,
-            style: const TextStyle(fontSize: 16),
-            textAlign: TextAlign.center,
-          ),
-        ],
-      ) : const SizedBox.shrink(),
-    ),
+    child: isTextVisible
+        ? Column(
+      children: [
+        Text(
+          text,
+          style: const TextStyle(fontSize: 16),
+          textAlign: TextAlign.center,
+        ),
+      ],
+    ) : const SizedBox.shrink(), // 아무것도 보여주지 않음
   );
 }

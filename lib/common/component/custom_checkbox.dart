@@ -1,3 +1,10 @@
+/*
+ 체크박스 모듈 사용 시
+ size.dart 에 있는 3개의 배열(checkStatus, checkboxText, showMoreText) 선언
+ checkAllCheckBox, updateCheckStatus 함수 선언 후 사용 가능
+ 자세한 코드는 size.dart, custom_checkBox.dart 확인
+ */
+
 import 'package:clean_up_code/common/component/custom_show_hide_text.dart';
 import 'package:flutter/material.dart';
 
@@ -59,7 +66,7 @@ class _CustomCheckboxWidgetState extends State<CustomCheckboxWidget> {
                         ? const Icon(Icons.keyboard_arrow_down)
                         : const Icon(Icons.keyboard_arrow_right),
                   )
-                : const SizedBox(),
+                : const SizedBox.shrink(), // 아무것도 보여주지 않음
           ],
         ),
         if (iconBtnStatus)

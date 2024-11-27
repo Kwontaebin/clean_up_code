@@ -26,11 +26,7 @@ class _SizeScreenState extends State<SizeScreen> {
   void checkAllCheckBox(bool value) {
     setState(() {
       for (int i = 0; i < checkStatus.length; i++) {
-        if (value) {
-          checkStatus[i] = true;
-        } else {
-          checkStatus[i] = false;
-        }
+        checkStatus[i] = value;
       }
     });
   }
@@ -39,8 +35,7 @@ class _SizeScreenState extends State<SizeScreen> {
     setState(() {
       checkStatus[index] = value;
 
-      if (checkStatus[1] && checkStatus[2] && checkStatus[3]) checkStatus[0] = true;
-      else if (!checkStatus[1] || !checkStatus[2] || !checkStatus[3]) checkStatus[0] = false;
+      checkStatus[0] = checkStatus[1] && checkStatus[2] && checkStatus[3];
     });
   }
 
@@ -100,9 +95,7 @@ class _SizeScreenState extends State<SizeScreen> {
                             text: checkBoxText[i - 1],
                             isChecked: checkStatus[i],
                             onChanged: (value) {
-                              setState(() {
-                                updateCheckStatus(i, value!);
-                              });
+                              updateCheckStatus(i, value!);
                             },
                             showText: showMoreText[i - 1],
                           ),

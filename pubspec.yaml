@@ -16,6 +16,7 @@ dependencies:
   shimmer: ^3.0.0 # 스켈레톤 구현 라이브러리
   dio: ^5.7.0
   fluttertoast: ^8.2.8
+  socket_io_client: ^3.0.2
 
 dev_dependencies:
   flutter_test:

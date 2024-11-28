@@ -13,7 +13,6 @@ import 'package:flutter/services.dart';
 import '../function/sizeFn.dart';
 
 class CustomTextFieldWidget extends StatefulWidget {
-  final TextEditingController? controller;
   final String hintText;
   final Color backGroundColor;
   final double? width;
@@ -25,7 +24,6 @@ class CustomTextFieldWidget extends StatefulWidget {
 
   const CustomTextFieldWidget({
     super.key,
-    this.controller,
     this.width,
     this.height,
     required this.hintText,

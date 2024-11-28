@@ -9,6 +9,7 @@ import 'package:clean_up_code/move_screen/view/firstScreen.dart';
 import 'package:clean_up_code/slide_img/view/slideImg.dart';
 import 'package:flutter/material.dart';
 import '../../common/component/custom_elevatedButton.dart';
+import '../../common/function/navigator.dart';
 import '../../common/function/sizeFn.dart';
 
 class SizeScreen extends StatefulWidget {
@@ -21,7 +22,11 @@ class SizeScreen extends StatefulWidget {
 class _SizeScreenState extends State<SizeScreen> {
   List<bool> checkStatus = [false, false, false, false];
   List<String> checkBoxText = ["첫 번째 선택", "두 번째 이용 약관 선택", "세 번쨰 동의"];
-  List<String> showMoreText = ["첫 번째 글자 더보기 \n줄바꿈 까지 완벽하게", "두 번째 이용 약관 선택 더보기 \n줄바꿈 까지 완벽하게", "세 번쨰 동의 약관 더보기 \n줄바꿈 까지 완벽하게"];
+  List<String> showMoreText = [
+    "첫 번째 글자 더보기 \n줄바꿈 까지 완벽하게",
+    "두 번째 이용 약관 선택 더보기 \n줄바꿈 까지 완벽하게",
+    "세 번쨰 동의 약관 더보기 \n줄바꿈 까지 완벽하게"
+  ];
 
   void checkAllCheckBox(bool value) {
     setState(() {
@@ -114,7 +119,6 @@ class _SizeScreenState extends State<SizeScreen> {
                   text: "버튼",
                   buttonTextSize: sizeFn(context).width * 0.06,
                   color: Colors.blue,
-                  // buttonTextColor: Colors.black,
                   buttonTextFontWeight: FontWeight.w900,
                   onPressed: () {
                     showMyDialog(
@@ -128,11 +132,7 @@ class _SizeScreenState extends State<SizeScreen> {
                       rightButtonOnPressed: () {
                         print("확인!!");
                         customToast("화면 이동!");
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const FirstScreen()),
-                        );
+                        navigatorFn(context, const FirstScreen());
                       },
                     );
                   },

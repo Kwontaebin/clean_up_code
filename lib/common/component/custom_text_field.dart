@@ -65,9 +65,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
 
     // height 값에 따라 contentPadding을 동적으로 설정
     EdgeInsetsGeometry contentPadding = EdgeInsets.symmetric(
-      vertical: (widget.height != null && widget.height! < 40)
-          ? widget.height! * 0.2
-          : 20,
+      vertical: (widget.height != null && widget.height! < 40) ? widget.height! * 0.2 : 20,
       horizontal: 20,
     );
 
@@ -79,16 +77,14 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         // controller: widget.controller,
         controller: myController,
         onChanged: widget.onChanged,
-        keyboardType:
-            widget.onlyNum ? TextInputType.number : TextInputType.text,
+        keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
         inputFormatters: [
           FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
           if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
         ],
         style: textStyle,
         decoration: InputDecoration(
-          suffixIcon: widget.obscureText
-              ? IconButton(
+          suffixIcon: widget.obscureText ? IconButton(
                   onPressed: () {
                     setState(() {
                       _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
@@ -97,8 +93,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
                   icon: Icon(
                     _obscureText ? Icons.visibility : Icons.visibility_off,
                   ),
-                )
-              : null,
+                ) : null,
           contentPadding: contentPadding,
           hintText: widget.hintText,
           hintStyle: textStyle,

@@ -37,6 +37,7 @@ class _BackendConnectionState extends State<BackendConnection> {
     socket.on('message', (data) {
       setState(() {
         response = data;
+        print(data);
       });
     });
 

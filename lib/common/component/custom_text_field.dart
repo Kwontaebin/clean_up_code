@@ -74,7 +74,6 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       height: 70,
       child: TextFormField(
         obscureText: _obscureText,
-        // controller: widget.controller,
         controller: myController,
         onChanged: widget.onChanged,
         keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,

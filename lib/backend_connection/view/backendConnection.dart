@@ -61,6 +61,7 @@ class _BackendConnectionState extends State<BackendConnection> {
     return Scaffold(
       appBar: const CustomAppBar(
         title: "server",
+        showLeading: false,
       ),
       body: GestureDetector(
         onTap: () {

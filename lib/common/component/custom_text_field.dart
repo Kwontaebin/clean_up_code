@@ -40,13 +40,13 @@ class CustomTextFieldWidget extends StatefulWidget {
 
 class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   late bool _obscureText;
-  final myController = TextEditingController();
+  final _myController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
     _obscureText = widget.obscureText; // 초기 상태 설정
-    myController.text = widget.myControllerText;
+    _myController.text = widget.myControllerText;
   }
 
   @override
@@ -74,7 +74,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       height: 70,
       child: TextFormField(
         obscureText: _obscureText,
-        controller: myController,
+        controller: _myController,
         onChanged: widget.onChanged,
         keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
         inputFormatters: [

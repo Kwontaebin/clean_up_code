@@ -114,7 +114,8 @@ class _SizeScreenState extends State<SizeScreen> {
                   child: customLoading(),
                 ),
                 SizedBox(height: deviceHeight(context) * 0.01),
-                CustomElevatedButton(
+                customElevatedButton(
+                  context,
                   height: deviceHeight(context) * 0.06,
                   text: "버튼",
                   buttonTextSize: sizeFn(context).width * 0.06,

@@ -15,7 +15,8 @@ class FirstScreen extends StatelessWidget {
         showLeading: false,
       ),
       body: Center(
-        child: CustomElevatedButton(
+        child: customElevatedButton(
+          context,
           text: "button",
           onPressed: () {
             navigatorFn(context, const SecondScreen());

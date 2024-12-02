@@ -78,7 +78,6 @@ class _BackendConnectionState extends State<BackendConnection> {
               children: [
                 CustomTextFieldWidget(
                   hintText: "회원가입 아이디를 입려하세요",
-                  // 모듈에서 구현 signId를 받는다고 치면됨
                   onChanged: (value) {
                     setState(() {
                       signId = value;
@@ -96,7 +95,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 10),
-                CustomElevatedButton(
+                customElevatedButton(
+                  context,
                   text: "회원가입",
                   onPressed: () async {
                     setState(() {
@@ -108,10 +108,7 @@ class _BackendConnectionState extends State<BackendConnection> {
 
                     print(signId);
                     print(requestData);
-                    if (signId == '' || signPw == '') print("모두 다 작성해주세요");
-                    else {
-                      postDio(postData: requestData, url: "register");
-                    }
+                    (signId == '' || signPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "register");
                   },
                 ),
                 divider(),
@@ -134,7 +131,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                   obscureText: true,
                 ),
                 const SizedBox(height: 20),
-                CustomElevatedButton(
+                customElevatedButton(
+                  context,
                   text: "로그인",
                   onPressed: () async {
                     setState(() {
@@ -143,8 +141,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                         'pw': loginPw,
                       };
                     });
-                    if (loginId == '' || loginPw == '') print("모두 다 작성해주세요");
-                    else postDio(postData: requestData, url: "login");
+                    (loginId == '' || loginPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "login");
                   },
                 ),
                 divider(),
@@ -160,11 +157,11 @@ class _BackendConnectionState extends State<BackendConnection> {
                   },
                 ),
                 const SizedBox(height: 20),
-                CustomElevatedButton(
+                customElevatedButton(
+                  context,
                   text: "소켓 통신 버튼",
                   onPressed: () {
-                    if (socketText.isNotEmpty)
-                      socket.emit('message', socketText);
+                    if (socketText.isNotEmpty) socket.emit('message', socketText);
                   },
                 )
               ],

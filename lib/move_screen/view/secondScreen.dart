@@ -13,7 +13,8 @@ class SecondScreen extends StatelessWidget {
     return Scaffold(
       appBar: const CustomAppBar(title: "secondScreen"),
       body: Center(
-        child: CustomElevatedButton(
+        child: customElevatedButton(
+          context,
           text: "button",
           onPressed: () {
             navigatorFn(context, const ThirdScreen());

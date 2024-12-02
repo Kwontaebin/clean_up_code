@@ -14,8 +14,7 @@ class ImgSlideScreen extends StatefulWidget {
 }
 
 class _ImgSlideScreenState extends State<ImgSlideScreen> {
-  final CarouselSliderController _carouselController =
-      CarouselSliderController();
+  final CarouselSliderController _carouselController = CarouselSliderController();
   int _currentIndex = 0;
 
   // 색상을 이미지로 변경 변경

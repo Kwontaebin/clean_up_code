@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 
+import '../function/sizeFn.dart';
+import 'custom_elevatedButton.dart';
+import 'custom_text_field.dart';
+
+// 확인 취소 버튼이 뜸
 void showMyDialog(
     BuildContext context, {
       required String title,
@@ -31,6 +36,42 @@ void showMyDialog(
               rightButtonOnPressed();
             },
           ),
+        ],
+      );
+    },
+  );
+}
+
+// 입력을 할수 있는 창이 뜸
+void showTextFieldDialogModule(BuildContext context, {
+  required String titleText,
+  required String hintText,
+  required ValueChanged onChanged,
+  required VoidCallback onPressed,
+}) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: Text(titleText),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            CustomTextFieldWidget(
+              hintText: hintText,
+              onChanged: onChanged,
+              autoFocus: true,
+            )
+          ],
+        ),
+        actions: [
+          customElevatedButton(
+            width: sizeFn(context).width * 0.08,
+            color: const Color.fromRGBO(232, 100, 122, 1.0),
+            context,
+            text: "검색",
+            onPressed: onPressed,
+          )
         ],
       );
     },

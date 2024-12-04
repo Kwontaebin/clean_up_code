@@ -127,12 +127,12 @@ class _SizeScreenState extends State<SizeScreen> {
                       title: '테스트',
                       content: "지금은 테스트중!",
                       leftButtonOnPressed: () {
-                        customToast("취소");
+                        customToast(message: "취소");
                         print("취소!!");
                       },
                       rightButtonOnPressed: () {
                         print("확인!!");
-                        customToast("화면 이동!");
+                        customToast(message: "화면 이동!");
                         navigatorFn(context, const FirstScreen());
                       },
                     );

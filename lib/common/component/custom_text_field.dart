@@ -21,6 +21,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   final bool onlyNum;
   final bool obscureText;
   final String myControllerText;
+  final bool autoFocus;
 
   const CustomTextFieldWidget({
     super.key,
@@ -32,6 +33,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.onlyNum = false,
     this.obscureText = false,
     this.myControllerText = "",
+    this.autoFocus = false,
   });
 
   @override
@@ -73,6 +75,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       width: widget.width ?? sizeFn(context).width * 0.9,
       height: 70,
       child: TextFormField(
+        autofocus: widget.autoFocus,
         obscureText: _obscureText,
         controller: _myController,
         onChanged: widget.onChanged,

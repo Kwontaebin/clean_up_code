@@ -1,5 +1,7 @@
 import 'package:clean_up_code/common/const/data.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import '../component/custom_toast.dart';
 
 void postDio({
   required Map<String, dynamic> postData,
@@ -12,31 +14,36 @@ void postDio({
     Response response = await dio.post(
       "$IP/$url",
       data: postData,
-      options: Options(
-        validateStatus: (status) {
-          return status! <= 500; // 500 이상의 상태 코드는 예외를 발생시킴
-        },
-      ),
     );
 
     // 서버 응답 상태 코드가 200일 경우
     if (response.statusCode == 200) {
       print('Login successful: ${response.data}');
     }
-    // 서버 응답 상태 코드가 401일 경우 (로그인 실패)
-    else if (response.statusCode == 401) {
-      print('유저 정보 없음: ${response.data['message']}');
-    }
-    // 서버 응답 상태 코드가 404일 경우 (페이지 없음)
-    else if (response.statusCode == 400) {
-      print('데이터 형식이 올바르지 않습니다: ${response.data}');
-    }
-    // 기타 상태 코드에 대한 처리
-    else {
-      print('Unexpected error: ${response.statusCode}, ${response.data}');
-    }
   } catch (e) {
     // 네트워크 오류 또는 기타 예외 처리
-    print('Error: $e');
+    if (e is DioException) {
+      int? errCode = e.response?.statusCode;
+
+      if(errCode == 400) {
+        print('유저 정보 없음: ${e.response?.statusMessage}');
+        customToast(
+            message: "데이터 형식이 올바르지 않습니다",
+            color: Colors.black
+        );
+      } else if (errCode == 401) {
+        print('유저 정보 없음: ${e.response?.statusMessage}');
+        customToast(
+            message: "유저 정보 없음",
+            color: Colors.black
+        );
+      }  else if(errCode == 500) {
+        print('Unexpected erro: ${e.response?.statusMessage}');
+        customToast(
+            message: "서버 에러",
+            color: Colors.black
+        );
+      }
+    }
   }
 }

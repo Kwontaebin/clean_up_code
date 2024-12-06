@@ -77,7 +77,7 @@ class _BackendConnectionState extends State<BackendConnection> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 CustomTextFieldWidget(
-                  hintText: "회원가입 아이디를 입려하세요",
+                  hintText: "회원가입 아이디를 입력하세요",
                   onChanged: (value) {
                     setState(() {
                       signId = value;
@@ -86,7 +86,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                 ),
                 const SizedBox(height: 20),
                 CustomTextFieldWidget(
-                  hintText: "회원가입 비밀번호를 입려하세요",
+                  hintText: "회원가입 비밀번호를 입력하세요",
                   onChanged: (value) {
                     setState(() {
                       signPw = value;
@@ -106,8 +106,6 @@ class _BackendConnectionState extends State<BackendConnection> {
                       };
                     });
 
-                    print(signId);
-                    print(requestData);
                     (signId == '' || signPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "register");
                   },
                 ),
@@ -150,6 +148,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                 CustomTextFieldWidget(
                   hintText: "입력하세요",
                   myControllerText: socketText,
+                  textSpacing: true,
                   onChanged: (value) {
                     setState(() {
                       socketText = value;

@@ -20,7 +20,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
         VideoPlayerController.asset('asset/video/mov_bbb.mp4') // 로컬 비디오 파일
           ..initialize().then((_) {
             _controller.play(); // 자동 재생
-          });
+          },);
   }
 
   @override

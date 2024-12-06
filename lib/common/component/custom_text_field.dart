@@ -22,6 +22,7 @@ class CustomTextFieldWidget extends StatefulWidget {
   final bool obscureText;
   final String myControllerText;
   final bool autoFocus;
+  final bool textSpacing;
 
   const CustomTextFieldWidget({
     super.key,
@@ -34,6 +35,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.obscureText = false,
     this.myControllerText = "",
     this.autoFocus = false,
+    this.textSpacing = false,
   });
 
   @override
@@ -67,7 +69,9 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
 
     // height 값에 따라 contentPadding을 동적으로 설정
     EdgeInsetsGeometry contentPadding = EdgeInsets.symmetric(
-      vertical: (widget.height != null && widget.height! < 40) ? widget.height! * 0.2 : 20,
+      vertical: (widget.height != null && widget.height! < 40)
+          ? widget.height! * 0.2
+          : 20,
       horizontal: 20,
     );
 
@@ -81,21 +85,23 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
         onChanged: widget.onChanged,
         keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
         inputFormatters: [
-          FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
+          if (!widget.textSpacing) FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
           if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
         ],
         style: textStyle,
         decoration: InputDecoration(
-          suffixIcon: widget.obscureText ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
-                    });
-                  },
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                  ),
-                ) : null,
+          suffixIcon: widget.obscureText
+              ? IconButton(
+            onPressed: () {
+              setState(() {
+                _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
+              });
+            },
+            icon: Icon(
+              _obscureText ? Icons.visibility : Icons.visibility_off,
+            ),
+          )
+              : null,
           contentPadding: contentPadding,
           hintText: widget.hintText,
           hintStyle: textStyle,

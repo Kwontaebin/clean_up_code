@@ -6,6 +6,7 @@ import '../component/custom_toast.dart';
 void postDio({
   required Map<String, dynamic> postData,
   required String url,
+  required Function(Map<String, dynamic> data) onSuccess,
 }) async {
   Dio dio = Dio();
 
@@ -19,7 +20,9 @@ void postDio({
     // 서버 응답 상태 코드가 200일 경우
     if (response.statusCode == 200) {
       print('Login successful: ${response.data}');
-      customToast(message: response.data["message"], color: Colors.black);
+      customToast(message: response.data["message"], bgColor: Colors.black);
+
+      onSuccess(response.data);
     }
   } catch (e) {
     // 네트워크 오류 또는 기타 예외 처리
@@ -29,7 +32,7 @@ void postDio({
       print(errCode);
 
       print('데이터 형식 수정 부탁: ${e.response?.data["message"]}');
-      customToast(message: e.response?.data["message"], color: Colors.black);
+      customToast(message: e.response?.data["message"], bgColor: Colors.black);
     }
   }
 }

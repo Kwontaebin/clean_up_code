@@ -67,6 +67,11 @@ class _SizeScreenState extends State<SizeScreen> {
                   height: deviceHeight(context) * 0.3,
                   child: const ImgSlideScreen(),
                 ),
+                SizedBox(height: deviceHeight(context) * 0.01),
+                SizedBox(
+                  height: deviceHeight(context) * 0.25,
+                  child: const VideoPlayerScreen(videoRoute: "asset/video/mov_bbb.mp4"),
+                ),
                 SizedBox(
                   height: deviceHeight(context) * 0.3,
                   child: SingleChildScrollView(
@@ -108,11 +113,7 @@ class _SizeScreenState extends State<SizeScreen> {
                     ),
                   ),
                 ),
-                SizedBox(height: deviceHeight(context) * 0.01),
-                SizedBox(
-                  height: deviceHeight(context) * 0.25,
-                  child: const VideoPlayerScreen(videoRoute: "asset/video/mov_bbb.mp4"),
-                ),
+
                 SizedBox(height: deviceHeight(context) * 0.01),
                 customElevatedButton(
                   context,

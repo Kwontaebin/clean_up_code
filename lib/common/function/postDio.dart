@@ -1,9 +1,9 @@
-import 'package:clean_up_code/common/const/data.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import '../component/custom_toast.dart';
+import '../const/data.dart';
 
-void postDio({
+Future<void> postDio({
   required Map<String, dynamic> postData,
   required String url,
   required Function(Map<String, dynamic> data) onSuccess,
@@ -19,9 +19,8 @@ void postDio({
 
     // 서버 응답 상태 코드가 200일 경우
     if (response.statusCode == 200) {
-      print('Login successful: ${response.data}');
+      // print('Login successful: ${response.data}');
       customToast(message: response.data["message"], bgColor: Colors.black);
-
       onSuccess(response.data);
     }
   } catch (e) {

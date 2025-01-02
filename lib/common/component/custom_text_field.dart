@@ -1,12 +1,12 @@
-// /*
-//   todo 해당 모듈 사용 시 필수 사항
-//   모듈을 불러오는 파일 제일 상단에 GestureDetector 위젯을 불러오고 밑의 코드 작성
-//         onTap: () {
-//           FocusScope.of(context).unfocus(); // 빈 공간 클릭 시 포커스 해제
-//         },
-//
-//   이렇게 하면 커서가 집중되어 있을 때 빈 공간을 클릭하면 커서 집중이 풀린다.
-//  */
+/*
+  todo 해당 모듈 사용 시 필수 사항
+  모듈을 불러오는 파일 제일 상단에 GestureDetector 위젯을 불러오고 밑의 코드 작성
+        onTap: () {
+          FocusScope.of(context).unfocus(); // 빈 공간 클릭 시 포커스 해제
+        },
+
+  이렇게 하면 커서가 집중되어 있을 때 빈 공간을 클릭하면 커서 집중이 풀린다.
+ */
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -18,11 +18,12 @@ class CustomTextFieldWidget extends StatefulWidget {
   final double? width;
   final double? height;
   final ValueChanged<String> onChanged;
-  final bool onlyNum;
-  final bool obscureText;
-  final String myControllerText;
-  final bool autoFocus;
-  final bool textSpacing;
+  final bool onlyNum; // 오직 숫자만
+  final bool obscureText; // 글자 암호화(비밀번호)
+  final String myControllerText; // controller
+  final bool autoFocus; // 자동 포커스
+  final bool textSpacing; // 띄어쓰기
+  final bool clearText; // 버튼 또는 이벤트 발생시 textField 글자 지우기
 
   const CustomTextFieldWidget({
     super.key,
@@ -36,6 +37,7 @@ class CustomTextFieldWidget extends StatefulWidget {
     this.myControllerText = "",
     this.autoFocus = false,
     this.textSpacing = false,
+    this.clearText = false,
   });
 
   @override
@@ -57,8 +59,10 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   void didUpdateWidget(covariant CustomTextFieldWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     // myControllerText 값이 변경되었을 때 TextEditingController 업데이트
-    if (widget.myControllerText != oldWidget.myControllerText) {
-      _myController.text = widget.myControllerText;
+    if(widget.clearText) {
+      if (widget.myControllerText != oldWidget.myControllerText) {
+        _myController.text = widget.myControllerText;
+      }
     }
   }
 

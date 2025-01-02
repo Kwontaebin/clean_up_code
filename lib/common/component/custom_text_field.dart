@@ -1,12 +1,12 @@
-/*
-  todo 해당 모듈 사용 시 필수 사항
-  모듈을 불러오는 파일 제일 상단에 GestureDetector 위젯을 불러오고 밑의 코드 작성
-        onTap: () {
-          FocusScope.of(context).unfocus(); // 빈 공간 클릭 시 포커스 해제
-        },
-
-  이렇게 하면 커서가 집중되어 있을 때 빈 공간을 클릭하면 커서 집중이 풀린다.
- */
+// /*
+//   todo 해당 모듈 사용 시 필수 사항
+//   모듈을 불러오는 파일 제일 상단에 GestureDetector 위젯을 불러오고 밑의 코드 작성
+//         onTap: () {
+//           FocusScope.of(context).unfocus(); // 빈 공간 클릭 시 포커스 해제
+//         },
+//
+//   이렇게 하면 커서가 집중되어 있을 때 빈 공간을 클릭하면 커서 집중이 풀린다.
+//  */
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -50,7 +50,16 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   void initState() {
     super.initState();
     _obscureText = widget.obscureText; // 초기 상태 설정
-    _myController.text = widget.myControllerText;
+    _myController.text = widget.myControllerText; // 초기 값 설정
+  }
+
+  @override
+  void didUpdateWidget(covariant CustomTextFieldWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    // myControllerText 값이 변경되었을 때 TextEditingController 업데이트
+    if (widget.myControllerText != oldWidget.myControllerText) {
+      _myController.text = widget.myControllerText;
+    }
   }
 
   @override

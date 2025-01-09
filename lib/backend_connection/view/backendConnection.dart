@@ -106,7 +106,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                       };
                     });
 
-                    (signId == '' || signPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "register", onSuccess: (Map<String, dynamic> data) {  });
+                    (signId == '' || signPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "register", onData: (Map<String, dynamic> data) {  });
                   },
                 ),
                 divider(),
@@ -139,7 +139,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                         'pw': loginPw,
                       };
                     });
-                    (loginId == '' || loginPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "login", onSuccess: (Map<String, dynamic> data) {  });
+                    (loginId == '' || loginPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "login", onData: (Map<String, dynamic> data) {  });
                   },
                 ),
                 divider(),

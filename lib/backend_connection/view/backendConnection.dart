@@ -15,11 +15,7 @@ class BackendConnection extends StatefulWidget {
 }
 
 class _BackendConnectionState extends State<BackendConnection> {
-  String signId = '';
-  String signPw = '';
-
-  String loginId = '';
-  String loginPw = '';
+  String signId = '', signPw = '', loginId = '', loginPw = '';
 
   Map<String, dynamic> requestData = {};
 
@@ -83,6 +79,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                       signId = value;
                     });
                   },
+                  myControllerText: signId,
+                  clearText: true,
                 ),
                 const SizedBox(height: 20),
                 CustomTextFieldWidget(
@@ -92,6 +90,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                       signPw = value;
                     });
                   },
+                  myControllerText: signPw,
+                  clearText: true,
                   obscureText: true,
                 ),
                 const SizedBox(height: 10),
@@ -106,7 +106,23 @@ class _BackendConnectionState extends State<BackendConnection> {
                       };
                     });
 
-                    (signId == '' || signPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "register", onData: (Map<String, dynamic> data) {  });
+                    (signId == '' || signPw == '')
+                        ? print("모두 다 작성해주세요")
+                        : postDio(
+                            postData: requestData,
+                            url: "register",
+                            onData: (Map<String, dynamic> data) {
+
+                              if (data["statusCode"] == 200) {
+                                setState(() {
+                                  signId = "";
+                                  signPw = "";
+
+                                  print(signId);
+                                });
+                              }
+                            },
+                          );
                   },
                 ),
                 divider(),
@@ -139,7 +155,12 @@ class _BackendConnectionState extends State<BackendConnection> {
                         'pw': loginPw,
                       };
                     });
-                    (loginId == '' || loginPw == '') ? print("모두 다 작성해주세요") : postDio(postData: requestData, url: "login", onData: (Map<String, dynamic> data) {  });
+                    (loginId == '' || loginPw == '')
+                        ? print("모두 다 작성해주세요")
+                        : postDio(
+                            postData: requestData,
+                            url: "login",
+                            onData: (Map<String, dynamic> data) {});
                   },
                 ),
                 divider(),
@@ -160,7 +181,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                   context,
                   text: "소켓 통신 버튼",
                   onPressed: () {
-                    if (socketText.isNotEmpty) socket.emit('message', socketText);
+                    if (socketText.isNotEmpty)
+                      socket.emit('message', socketText);
                   },
                 )
               ],

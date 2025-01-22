@@ -1,5 +1,3 @@
-import 'package:clean_up_code/common/component/custom_appbar.dart';
-import 'package:clean_up_code/common/function/sizeFn.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -18,7 +16,7 @@ class _WebViewExampleState extends State<WebViewExample> {
     super.initState();
     _controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted) // JavaScript 활성화
-      ..loadRequest(Uri.parse('https://www.naver.com')); // 원하는 URL 로드
+      ..loadRequest(Uri.parse('"http://place.map.kakao.com/1913983226"')); // 원하는 URL 로드
   }
 
   @override

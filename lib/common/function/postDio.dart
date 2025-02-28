@@ -40,13 +40,12 @@ Future<void> postDio({
 
         print('데이터 형식 수정 부탁: ${e.response?.data["message"]}');
         customToast(
-            message: e.response?.data["message"], bgColor: Colors.black);
+          message: e.response?.data["message"],
+          bgColor: Colors.black,
+        );
       } else {
         print("서버 연결이 안 돼 있습니다");
-        customToast(
-            message: "서버 연결이 안 돼 있습니다",
-            bgColor: Colors.black
-        );
+        customToast(message: "서버 연결이 안 돼 있습니다", bgColor: Colors.black);
       }
     }
   }

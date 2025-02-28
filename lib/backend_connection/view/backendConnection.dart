@@ -110,7 +110,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                         ? print("모두 다 작성해주세요")
                         : postDio(
                             postData: requestData,
-                            url: "register",
+                            url: "auth/register",
                             onData: (Map<String, dynamic> data) {
 
                               if (data["statusCode"] == 200) {
@@ -118,7 +118,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                                   signId = "";
                                   signPw = "";
 
-                                  print(signId);
+                                  // print(signId);
                                 });
                               }
                             },
@@ -151,15 +151,15 @@ class _BackendConnectionState extends State<BackendConnection> {
                   onPressed: () async {
                     setState(() {
                       requestData = {
-                        'id': loginId,
-                        'pw': loginPw,
+                        'user_id': loginId,
+                        'user_pw': loginPw,
                       };
                     });
                     (loginId == '' || loginPw == '')
                         ? print("모두 다 작성해주세요")
                         : postDio(
                             postData: requestData,
-                            url: "login",
+                            url: "auth/login",
                             onData: (Map<String, dynamic> data) {});
                   },
                 ),
@@ -181,8 +181,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                   context,
                   text: "소켓 통신 버튼",
                   onPressed: () {
-                    if (socketText.isNotEmpty)
-                      socket.emit('message', socketText);
+                    if (socketText.isNotEmpty) socket.emit('message', socketText);
                   },
                 )
               ],

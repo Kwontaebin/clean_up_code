@@ -45,3 +45,9 @@ android {
 flutter {
     source = "../.."
 }
+
+//dependencies {
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+//    implementation platform('com.google.firbase:firbase-bom:29.0.2')
+//    implementation 'com.google.firbase:firbase-analytics'
+//}

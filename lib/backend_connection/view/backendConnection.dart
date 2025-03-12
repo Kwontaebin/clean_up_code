@@ -111,7 +111,9 @@ class _BackendConnectionState extends State<BackendConnection> {
                         : postDio(
                             postData: requestData,
                             url: "register",
-                            onData: (Map<String, dynamic> data) {},
+                            onData: (Map<String, dynamic> data) {
+                              if(data["status"] == 200) setState(() => {signId = "", signPw = ""});
+                            },
                           );
                   },
                 ),

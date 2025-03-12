@@ -1,7 +1,6 @@
 import 'package:clean_up_code/common/component/custom_appbar.dart';
 import 'package:clean_up_code/common/component/custom_elevatedButton.dart';
 import 'package:clean_up_code/common/component/custom_text_field.dart';
-import 'package:clean_up_code/common/const/data.dart';
 import 'package:clean_up_code/common/function/postDio.dart';
 import 'package:clean_up_code/common/function/sizeFn.dart';
 import 'package:flutter/material.dart';
@@ -16,6 +15,7 @@ class BackendConnection extends StatefulWidget {
 
 class _BackendConnectionState extends State<BackendConnection> {
   String signId = '', signPw = '', loginId = '', loginPw = '';
+  dynamic loginIdErrorText, loginPwErrorText;
 
   Map<String, dynamic> requestData = {};
 
@@ -112,7 +112,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                             postData: requestData,
                             url: "register",
                             onData: (Map<String, dynamic> data) {
-                              if(data["status"] == 200) setState(() => {signId = "", signPw = ""});
+                              if (data["status"] != 200) setState(() => {signPw = ""});
                             },
                           );
                   },
@@ -121,12 +121,12 @@ class _BackendConnectionState extends State<BackendConnection> {
                 CustomTextFieldWidget(
                   hintText: "로그인 아이디를 입려하세요",
                   myControllerText: loginId,
-                  clearText: true,
                   onChanged: (value) {
                     setState(() {
                       loginId = value;
                     });
                   },
+                  errorText: loginIdErrorText,
                 ),
                 const SizedBox(height: 20),
                 CustomTextFieldWidget(
@@ -139,6 +139,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                     });
                   },
                   obscureText: true,
+                  errorText: loginPwErrorText,
                 ),
                 const SizedBox(height: 20),
                 customElevatedButton(
@@ -157,7 +158,17 @@ class _BackendConnectionState extends State<BackendConnection> {
                             postData: requestData,
                             url: "login",
                             onData: (Map<String, dynamic> data) {
-                              if(data["status"] == 200) setState(() =>  {loginId = "", loginPw = ""});
+                              if (data["status"] != 200) setState(() => {loginPw = ""});
+
+                              if (data["status"] == "401_id") {
+                                setState(() {loginIdErrorText = "일치하는 정보가 없습니다."; loginPwErrorText = null;});
+                              }
+                              else if (data["status"] == "401_pw") {
+                                setState(() {loginPwErrorText = "비밀번호가 일치하지 않습니다."; loginIdErrorText = null;});
+                              }
+                              else if (data["status"] == 200) {
+                                setState(() {loginIdErrorText = null; loginPwErrorText = null;});
+                              }
                             },
                           );
                   },

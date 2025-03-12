@@ -24,12 +24,14 @@ class CustomTextFieldWidget extends StatefulWidget {
   final bool autoFocus; // 자동 포커스
   final bool textSpacing; // 띄어쓰기
   final bool clearText; // 버튼 또는 이벤트 발생시 textField 글자 지우기
+  final dynamic errorText; // 에러 발생시 보여주는 텍스트
 
   const CustomTextFieldWidget({
     super.key,
     this.width,
     this.height,
     required this.hintText,
+    this.errorText,
     this.backGroundColor = Colors.white12,
     required this.onChanged,
     this.onlyNum = false,
@@ -90,44 +92,55 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
 
     return SizedBox(
       width: widget.width ?? sizeFn(context).width * 0.9,
-      height: 70,
-      child: TextFormField(
-        autofocus: widget.autoFocus,
-        obscureText: _obscureText,
-        controller: _myController,
-        onChanged: widget.onChanged,
-        keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
-        inputFormatters: [
-          if (!widget.textSpacing) FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
-          if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
-        ],
-        style: textStyle,
-        decoration: InputDecoration(
-          suffixIcon: widget.obscureText
-              ? IconButton(
-            onPressed: () {
-              setState(() {
-                _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
-              });
-            },
-            icon: Icon(
-              _obscureText ? Icons.visibility : Icons.visibility_off,
-            ),
-          )
-              : null,
-          contentPadding: contentPadding,
-          hintText: widget.hintText,
-          hintStyle: textStyle,
-          fillColor: widget.backGroundColor,
-          filled: true,
-          border: baseBorder,
-          enabledBorder: baseBorder,
-          focusedBorder: baseBorder.copyWith(
-            borderSide: baseBorder.borderSide.copyWith(
-              color: Colors.black,
+      height: 82,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          // TextFormField를 고정 크기로 감쌈
+          SizedBox(
+            height: 80, // TextFormField 높이 고정
+            child: TextFormField(
+              autofocus: widget.autoFocus,
+              obscureText: _obscureText,
+              controller: _myController,
+              onChanged: widget.onChanged,
+              keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
+              inputFormatters: [
+                if (!widget.textSpacing) FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
+                if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
+              ],
+              style: textStyle,
+              decoration: InputDecoration(
+                suffixIcon: widget.obscureText
+                    ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
+                    });
+                  },
+                  icon: Icon(
+                    _obscureText ? Icons.visibility : Icons.visibility_off,
+                  ),
+                ) : null,
+                errorText: widget.errorText, // 에러 텍스트 표시
+                contentPadding: contentPadding,
+                hintText: widget.hintText,
+                hintStyle: textStyle,
+                fillColor: widget.backGroundColor,
+                filled: true,
+                border: baseBorder,
+                enabledBorder: baseBorder,
+                focusedBorder: baseBorder.copyWith(
+                  borderSide: baseBorder.borderSide.copyWith(
+                    color: Colors.black,
+                  ),
+                ),
+              ),
             ),
           ),
-        ),
+          // 에러 메시지 아래 간격을 위해 SizedBox 추가
+          if (widget.errorText != null) const SizedBox(height: 2), // errorText가 있을 경우 간격을 추가
+        ],
       ),
     );
   }

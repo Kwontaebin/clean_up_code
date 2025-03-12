@@ -28,21 +28,21 @@ class _BackendConnectionState extends State<BackendConnection> {
     super.initState();
 
     // 서버와 연결
-    socket = IO.io(IP, {
-      'transports': ['websocket'],
-      'autoConnect': false,
-    });
-
-    // 서버로부터 메시지 수신
-    socket.on('message', (data) {
-      setState(() {
-        response = data;
-        print(data);
-      });
-    });
-
-    // 서버 연결
-    socket.connect();
+    // socket = IO.io(IP, {
+    //   'transports': ['websocket'],
+    //   'autoConnect': false,
+    // });
+    //
+    // // 서버로부터 메시지 수신
+    // socket.on('message', (data) {
+    //   setState(() {
+    //     response = data;
+    //     print(data);
+    //   });
+    // });
+    //
+    // // 서버 연결
+    // socket.connect();
   }
 
   @override
@@ -110,7 +110,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                         ? print("모두 다 작성해주세요")
                         : postDio(
                             postData: requestData,
-                            url: "auth/register",
+                            url: "register",
                             onData: (Map<String, dynamic> data) {
 
                               if (data["statusCode"] == 200) {
@@ -159,7 +159,7 @@ class _BackendConnectionState extends State<BackendConnection> {
                         ? print("모두 다 작성해주세요")
                         : postDio(
                             postData: requestData,
-                            url: "auth/login",
+                            url: "login",
                             onData: (Map<String, dynamic> data) {});
                   },
                 ),

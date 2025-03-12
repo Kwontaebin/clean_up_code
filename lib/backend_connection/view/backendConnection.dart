@@ -111,23 +111,15 @@ class _BackendConnectionState extends State<BackendConnection> {
                         : postDio(
                             postData: requestData,
                             url: "register",
-                            onData: (Map<String, dynamic> data) {
-
-                              if (data["statusCode"] == 200) {
-                                setState(() {
-                                  signId = "";
-                                  signPw = "";
-
-                                  // print(signId);
-                                });
-                              }
-                            },
+                            onData: (Map<String, dynamic> data) {},
                           );
                   },
                 ),
                 divider(),
                 CustomTextFieldWidget(
                   hintText: "로그인 아이디를 입려하세요",
+                  myControllerText: loginId,
+                  clearText: true,
                   onChanged: (value) {
                     setState(() {
                       loginId = value;
@@ -137,6 +129,8 @@ class _BackendConnectionState extends State<BackendConnection> {
                 const SizedBox(height: 20),
                 CustomTextFieldWidget(
                   hintText: "로그인 비밀번호를 입려하세요",
+                  myControllerText: loginPw,
+                  clearText: true,
                   onChanged: (value) {
                     setState(() {
                       loginPw = value;
@@ -160,7 +154,10 @@ class _BackendConnectionState extends State<BackendConnection> {
                         : postDio(
                             postData: requestData,
                             url: "login",
-                            onData: (Map<String, dynamic> data) {});
+                            onData: (Map<String, dynamic> data) {
+                              if(data["status"] == 200) setState(() =>  {loginId = "", loginPw = ""});
+                            },
+                          );
                   },
                 ),
                 divider(),

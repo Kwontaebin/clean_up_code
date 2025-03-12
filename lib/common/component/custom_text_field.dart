@@ -61,7 +61,7 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   void didUpdateWidget(covariant CustomTextFieldWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
     // myControllerText 값이 변경되었을 때 TextEditingController 업데이트
-    if(widget.clearText) {
+    if (widget.clearText) {
       if (widget.myControllerText != oldWidget.myControllerText) {
         _myController.text = widget.myControllerText;
       }
@@ -84,21 +84,15 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
 
     // height 값에 따라 contentPadding을 동적으로 설정
     EdgeInsetsGeometry contentPadding = EdgeInsets.symmetric(
-      vertical: (widget.height != null && widget.height! < 40)
-          ? widget.height! * 0.2
-          : 20,
+      vertical: (widget.height != null && widget.height! < 40) ? widget.height! * 0.2 : 20,
       horizontal: 20,
     );
 
     return SizedBox(
       width: widget.width ?? sizeFn(context).width * 0.9,
-      height: 82,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // TextFormField를 고정 크기로 감쌈
-          SizedBox(
-            height: 80, // TextFormField 높이 고정
+      height: deviceHeight(context) * 0.08,
+      child: SizedBox(
+            height: deviceHeight(context) * 0.08, // TextFormField 높이 고정
             child: TextFormField(
               autofocus: widget.autoFocus,
               obscureText: _obscureText,
@@ -113,16 +107,14 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               decoration: InputDecoration(
                 suffixIcon: widget.obscureText
                     ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _obscureText = !_obscureText; // 클릭 시 텍스트 숨김/표시 토글
-                    });
-                  },
-                  icon: Icon(
-                    _obscureText ? Icons.visibility : Icons.visibility_off,
-                  ),
-                ) : null,
-                errorText: widget.errorText, // 에러 텍스트 표시
+                        onPressed: () {
+                          setState(() {
+                            _obscureText = !_obscureText;
+                          });
+                        },
+                        icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+                      ) : null,
+                errorText: widget.errorText,
                 contentPadding: contentPadding,
                 hintText: widget.hintText,
                 hintStyle: textStyle,
@@ -138,10 +130,6 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
               ),
             ),
           ),
-          // 에러 메시지 아래 간격을 위해 SizedBox 추가
-          if (widget.errorText != null) const SizedBox(height: 2), // errorText가 있을 경우 간격을 추가
-        ],
-      ),
     );
   }
 }

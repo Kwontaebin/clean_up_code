@@ -63,15 +63,17 @@ class _BackendConnectionState extends State<BackendConnection> {
         onTap: () {
           FocusScope.of(context).unfocus();
         },
-        child: SingleChildScrollView(
-          child: Container(
-            width: sizeFn(context).width * 1.0,
-            height: deviceHeight(context) * 1.0,
-            color: Colors.white,
+        child: Container(
+          width: sizeFn(context).width * 1.0,
+          height: deviceHeight(context) * 1.0,
+          color: Colors.white,
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const SizedBox(height: 20,),
+
                 CustomTextFieldWidget(
                   hintText: "회원가입 아이디를 입력하세요",
                   onChanged: (value) {

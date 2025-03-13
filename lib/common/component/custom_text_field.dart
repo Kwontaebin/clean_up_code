@@ -22,9 +22,9 @@ class CustomTextFieldWidget extends StatefulWidget {
   final bool obscureText; // 글자 암호화(비밀번호)
   final String myControllerText; // controller
   final bool autoFocus; // 자동 포커스
-  final bool textSpacing; // 띄어쓰기
-  final bool clearText; // 버튼 또는 이벤트 발생시 textField 글자 지우기
-  final dynamic errorText; // 에러 발생시 보여주는 텍스트
+  final bool textSpacing; // 띄어쓰기 허용 여부
+  final bool clearText; // 텍스트 지우기 기능
+  final dynamic errorText; // 에러 메시지
 
   const CustomTextFieldWidget({
     super.key,
@@ -60,11 +60,8 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
   @override
   void didUpdateWidget(covariant CustomTextFieldWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-    // myControllerText 값이 변경되었을 때 TextEditingController 업데이트
-    if (widget.clearText) {
-      if (widget.myControllerText != oldWidget.myControllerText) {
-        _myController.text = widget.myControllerText;
-      }
+    if (widget.clearText && widget.myControllerText != oldWidget.myControllerText) {
+      _myController.text = widget.myControllerText;
     }
   }
 
@@ -82,54 +79,66 @@ class _CustomTextFieldWidgetState extends State<CustomTextFieldWidget> {
       fontWeight: FontWeight.w400,
     );
 
-    // height 값에 따라 contentPadding을 동적으로 설정
     EdgeInsetsGeometry contentPadding = EdgeInsets.symmetric(
       vertical: (widget.height != null && widget.height! < 40) ? widget.height! * 0.2 : 20,
       horizontal: 20,
     );
 
-    return SizedBox(
-      width: widget.width ?? sizeFn(context).width * 0.9,
-      height: deviceHeight(context) * 0.08,
-      child: SizedBox(
-            height: deviceHeight(context) * 0.08, // TextFormField 높이 고정
-            child: TextFormField(
-              autofocus: widget.autoFocus,
-              obscureText: _obscureText,
-              controller: _myController,
-              onChanged: widget.onChanged,
-              keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
-              inputFormatters: [
-                if (!widget.textSpacing) FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
-                if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
-              ],
-              style: textStyle,
-              decoration: InputDecoration(
-                suffixIcon: widget.obscureText
-                    ? IconButton(
-                        onPressed: () {
-                          setState(() {
-                            _obscureText = !_obscureText;
-                          });
-                        },
-                        icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
-                      ) : null,
-                errorText: widget.errorText,
-                contentPadding: contentPadding,
-                hintText: widget.hintText,
-                hintStyle: textStyle,
-                fillColor: widget.backGroundColor,
-                filled: true,
-                border: baseBorder,
-                enabledBorder: baseBorder,
-                focusedBorder: baseBorder.copyWith(
-                  borderSide: baseBorder.borderSide.copyWith(
-                    color: Colors.black,
-                  ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+
+        if (widget.errorText != null)
+          SizedBox(
+            height: 20, // 고정된 높이 확보
+            child: Text(
+              widget.errorText!,
+              style: const TextStyle(color: Colors.red, fontSize: 12),
+            ),
+          ),
+
+        const SizedBox(height: 4), // 에러 메시지와 TextField 간격 조절
+
+        SizedBox(
+          width: widget.width ?? sizeFn(context).width * 0.9,
+          height: deviceHeight(context) * 0.08, // 고정된 높이 유지
+          child: TextFormField(
+            autofocus: widget.autoFocus,
+            obscureText: _obscureText,
+            controller: _myController,
+            onChanged: widget.onChanged,
+            keyboardType: widget.onlyNum ? TextInputType.number : TextInputType.text,
+            inputFormatters: [
+              if (!widget.textSpacing) FilteringTextInputFormatter.deny(RegExp(r'\s')), // 띄어쓰기 금지
+              if (widget.onlyNum) FilteringTextInputFormatter.digitsOnly,
+            ],
+            style: textStyle,
+            decoration: InputDecoration(
+              suffixIcon: widget.obscureText
+                  ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    _obscureText = !_obscureText;
+                  });
+                },
+                icon: Icon(_obscureText ? Icons.visibility : Icons.visibility_off),
+              ) : null,
+              contentPadding: contentPadding,
+              hintText: widget.hintText,
+              hintStyle: textStyle,
+              fillColor: widget.backGroundColor,
+              filled: true,
+              border: baseBorder,
+              enabledBorder: baseBorder,
+              focusedBorder: baseBorder.copyWith(
+                borderSide: baseBorder.borderSide.copyWith(
+                  color: Colors.black,
                 ),
               ),
             ),
           ),
+        ),
+      ],
     );
   }
 }
